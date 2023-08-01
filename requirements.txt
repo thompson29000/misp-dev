@@ -11,3 +11,4 @@ pytz
 pydeep2
 simplejson
 stix2-patterns>=1.2.0
+cryptography

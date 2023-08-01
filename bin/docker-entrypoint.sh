@@ -2,6 +2,8 @@
 # Copyright (C) 2022 National Cyber and Information Security Agency of the Czech Republic
 set -e
 
+source /opt/vault_secrets/mysql_cred2.sh
+
 if [ "$1" = 'supervisord' ]; then
     echo "======================================"
     echo "MISP $MISP_VERSION container image provided by National Cyber and Information Security Agency of the Czech Republic"
@@ -31,6 +33,7 @@ if [ "$1" = 'supervisord' ]; then
     php-fpm --test
 
     # Create database schema
+    sed -i 's/"/'\''/g' /var/www/MISP/INSTALL/MYSQL.sql
     su-exec apache misp_create_database.py $MYSQL_HOST $MYSQL_LOGIN $MYSQL_DATABASE /var/www/MISP/INSTALL/MYSQL.sql
 
     # Update database to latest version

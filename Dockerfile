@@ -70,7 +70,7 @@ RUN chmod u=r,g=r,o=r /var/www/MISP/app/Config/* && \
 
 # Verify image
 FROM misp as verify
-RUN touch /verified && \
+RUN touch /verified && \ 
     su-exec apache /usr/local/bin/misp_verify.sh
 
 # Final image
